@@ -6,28 +6,18 @@ Solving the lockboxes puzzle.
 
 def canUnlockAll(boxes):
     """
-    Check if all boxes can be opened using BFS.
-    Args:
-        boxes (List[List[int]]): List of lists representing boxes and keys.
-    Returns:
-        bool: True if all boxes can be opened, else False.
+    Check if all boxes can be opened.
     """
 
-    if not boxes:
+    if not boxes or type(boxes) is not list:
         return False
 
-    n = len(boxes)
-    visited = [False] * n
-    visited[0] = True
-    stack = [0]
+    unlocked = [0]
+    for n in unlocked:
+        for key in boxes[n]:
+            if key not in unlocked and key < len(boxes):
+                unlocked.append(key)
 
-    while stack:
-        current_box = stack.pop()
-        keys = boxes[current_box]
-
-        for key in keys:
-            if 0 <= key < n and not visited[key]:
-                visited[key] = True
-                stack.append(key)
-
-        return all(visited)
+    if len(unlocked) == len(boxes):
+        return True
+    return False
