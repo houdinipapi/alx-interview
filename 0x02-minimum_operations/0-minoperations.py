@@ -24,23 +24,17 @@ def minOperations(n):
     and summing them up, representing the minimum number of operations needed.
     """
 
-    # If 'n' is less than or equal to 1, it's impossible
-    # to achieve 'n' H characters.
-    if n <= 1:
-        return n
+    if not isinstance(n, int):
+        return 0
 
-    factors = []
+    op = 0
     i = 2
 
-    # Calculate the prime factors of 'n' and store them in the
-    # 'fators' list.
-    while i <= n:
-        if n % i == 0:
-            factors.append(i)
-            n //= i
-        else:
-            i += 1
+    while (i <= n):
+        if not (n % i):
+            n = int(n / i)
+            op += i
+            i = 1
+        i += 1
 
-    # Return the sum of the factors, representing the minimum
-    # number of operations required.
-    return sum(factors)
+    return op
